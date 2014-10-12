@@ -21,11 +21,13 @@ void setup()
   pinMode(PIN_RT, INPUT);
   pinMode(PIN_DN, INPUT);
   pinMode(PIN_LT, INPUT);
+  pinMode(PIN_B1, INPUT);
   // Enable internal pull-ups
   digitalWrite(PIN_UP, 1); 
   digitalWrite(PIN_RT, 1);
   digitalWrite(PIN_DN, 1); 
   digitalWrite(PIN_LT, 1); 
+  digitalWrite(PIN_B1, 1); 
 }
  
  
@@ -63,7 +65,7 @@ void loop()
     }
     bState[PIN_DN] = state;
   }
-  state = digitalRead(PIN_LT);00
+  state = digitalRead(PIN_LT);
   if (bState[PIN_LT] != state) {
     buf[2] = 80;   
     if(state) {
@@ -72,6 +74,16 @@ void loop()
       Serial.write(buf, 8);
     }
     bState[PIN_LT] = state;
+  }
+   state = digitalRead(PIN_B1);
+  if (bState[PIN_B1] != state) {
+    buf[2] = 44;   
+    if(state) {
+          releaseKey();
+    } else {
+      Serial.write(buf, 8);
+    }
+    bState[PIN_B1] = state;
   }
 }
  
