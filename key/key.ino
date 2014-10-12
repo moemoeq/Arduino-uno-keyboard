@@ -34,36 +34,45 @@ void loop()
   state = digitalRead(PIN_UP);
   if (bState[PIN_UP] != state) {
     buf[2] = 82;   
-    
     if(state) {
-      Serial.write(buf, 8);
+          releaseKey();
     } else {
-      releaseKey();
+      Serial.write(buf, 8);
     }
-    
     bState[PIN_UP] = state;
   }
  
   state = digitalRead(PIN_RT);
-  if (state != 1) {
-    buf[2] =  79;    
-
-    Serial.write(buf, 8);
-    releaseKey();
-  } 
+  if (bState[PIN_RT] != state) {
+    buf[2] = 79;   
+    if(state) {
+          releaseKey();
+    } else {
+      Serial.write(buf, 8);
+    }
+    bState[PIN_RT] = state;
+  }
  
-  state = digitalRead(PIN_DN);
-  if (state != 1) {
-    buf[2] = 81;    
-    Serial.write(buf, 8);
-    releaseKey();
-  } 
-  state = digitalRead(PIN_LT);
-  if (state != 1) {
-    buf[2] = 80;    
-    Serial.write(buf, 8);
-    releaseKey();
-  } 
+    state = digitalRead(PIN_DN);
+  if (bState[PIN_DN] != state) {
+    buf[2] = 81;   
+    if(state) {
+          releaseKey();
+    } else {
+      Serial.write(buf, 8);
+    }
+    bState[PIN_DN] = state;
+  }
+  state = digitalRead(PIN_LT);00
+  if (bState[PIN_LT] != state) {
+    buf[2] = 80;   
+    if(state) {
+          releaseKey();
+    } else {
+      Serial.write(buf, 8);
+    }
+    bState[PIN_LT] = state;
+  }
 }
  
 void releaseKey() 
